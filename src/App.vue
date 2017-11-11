@@ -12,7 +12,7 @@
     <div class="hearts">
       <img class="logo" src="./assets/sanity-logo.svg"/>
       +
-      <img class="logo" src="./assets/vue-logo.png"/>
+      <img class="logo" src="./assets/vue-logo.svg"/>
       =
       💖
     </div>
