@@ -14,16 +14,6 @@
           <img v-if="person.imageUrl" v-bind:src="person.imageUrl + '?w=240'"/>
           <h3>{{person.name}}</h3>
         </router-link>
-        <!-- <h3>Movies</h3>
-        <ul v-if="person.movies" class="people-list__item__movies-list">
-          <li v-for="movie in person.movies">
-            <div>
-              <router-link :to="{name: 'movie', params: {id: movie._id}}">
-                {{movie.title}}
-              </router-link>
-            </div>
-          </li>
-        </ul> -->
       </li>
     </ul>
 
@@ -36,11 +26,7 @@ import sanity from '../sanity'
 const query = `*[_type == "person"] {
   _id,
   name,
-  "imageUrl": image.asset->url,
-  "people": *[_type == "movie" && references(^._id)] {
-    _id,
-    title
-  }
+  "imageUrl": image.asset->url
 }[0...50]
 `
 
