@@ -64,3 +64,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.movies-list__directed-by {
+  display: block;
+  font-size: 1rem;
+}
+</style>

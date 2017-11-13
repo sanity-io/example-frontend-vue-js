@@ -1,30 +1,29 @@
 <template>
-  <div class="person">
+  <div>
     <div class="loading" v-if="loading">
       Loading...
     </div>
-
     <div v-if="error" class="error">
       {{ error }}
     </div>
-    <div class="person__header">
-      <img v-if="person.imageUrl" v-bind:src="person.imageUrl + '?w=240'"/>
-      <h1>{{person.name}}</h1>
+
+    <div v-if="person" class="person">
+      <div class="person__header">
+        <img v-if="person.imageUrl" v-bind:src="person.imageUrl + '?w=240'"/>
+        <h1>{{person.name}}</h1>
+      </div>
+      <h2>Acted in</h2>
+      <ul v-if="person.actedIn" class="list">
+        <li v-for="movie in person.actedIn">
+          <router-link :to="{name: 'movie', params: {id: movie._id}}">
+            <img v-if="movie.posterUrl" v-bind:src="movie.posterUrl + '?w=240'"/>
+            <div>
+              {{movie.title}} ({{movie.releaseDate.substr(0, 4)}})
+            </div>
+          </router-link>
+        </li>
+      </ul>
     </div>
-
-    <h2>Acted in</h2>
-    <ul v-if="person.actedIn" class="list">
-      <li v-for="movie in person.actedIn">
-        <router-link :to="{name: 'movie', params: {id: movie._id}}">
-          <img v-if="movie.posterUrl" v-bind:src="movie.posterUrl + '?w=240'"/>
-          <div>
-            {{movie.title}} ({{movie.releaseDate.substr(0, 4)}})
-          </div>
-        </router-link>
-      </li>
-    </ul>
-
-
   </div>
 </template>
 
@@ -77,3 +76,44 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.person > h2 {
+  margin: 2rem 0 0 0;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.person .list img {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  object-fit: cover;
+}
+
+.person .list {
+  line-height: 2rem;
+}
+
+.person__header {
+  clear: both;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.person__header > h1 {
+  font-size: 3rem;
+  line-height: 1em;
+  margin: 1rem 0 0 0;
+  padding: 0;
+}
+
+.person__header > img {
+  display: block;
+  width: 33vw;
+  max-width: 20rem;
+  height: auto;
+  float: left;
+  margin-right: 0.5rem;
+}
+</style>

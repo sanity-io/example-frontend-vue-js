@@ -7,24 +7,27 @@
     <div v-if="error" class="error">
       {{ error }}
     </div>
-    <div class="movie__header">
-      <img v-if="movie.posterUrl" v-bind:src="movie.posterUrl + '?w=240'"/>
-      {{movie.releaseDate.substr(0, 4)}}
-      <h1>
-        {{movie.title}}
-      </h1>
+
+    <div v-if="movie">
+      <div class="movie__header">
+        <img v-if="movie.posterUrl" v-bind:src="movie.posterUrl + '?w=240'" />
+        {{movie.releaseDate.substr(0, 4)}}
+        <h1>
+          {{movie.title}}
+        </h1>
+      </div>
+      <h2>Cast</h2>
+      <ul class="list">
+        <li v-for="cast in movie.cast">
+          <router-link :to="{name: 'person', params: {id: cast.person._id}}">
+            <img v-if="cast.person.imageUrl" v-bind:src="cast.person.imageUrl + '?w=240'" />
+            <div>
+              {{cast.person.name}} as {{cast.characterName}}
+            </div>
+          </router-link>
+        </li>
+      </ul>
     </div>
-    <h2>Cast</h2>
-    <ul class="list">
-      <li v-for="cast in movie.cast">
-        <router-link :to="{name: 'person', params: {id: cast.person._id}}">
-          <img v-if="cast.person.imageUrl" v-bind:src="cast.person.imageUrl + '?w=240'"/>
-          <div>
-            {{cast.person.name}} as {{cast.characterName}}
-          </div>
-        </router-link>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -81,3 +84,44 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.movie > h2 {
+  margin: 2rem 0 0 0;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.movie .list img {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  object-fit: cover;
+}
+
+.movie__header {
+  clear: both;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.movie__header > h1 {
+  font-size: 3rem;
+  line-height: 1em;
+  margin: 1rem 0 0 0;
+  padding: 0;
+}
+
+.movie__header > img {
+  display: block;
+  width: 33vw;
+  max-width: 20rem;
+  height: auto;
+  float: left;
+  margin-right: 0.5rem;
+}
+
+.movie .list {
+  line-height: 2rem;
+}
+</style>
