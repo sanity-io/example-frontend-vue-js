@@ -8,14 +8,14 @@
       {{ error }}
     </div>
 
-    <ul>
-      <li v-for="person in people">
+    <ul class="list">
+      <li v-for="person in people" class="list__item">
         <router-link :to="{name: 'person', params: {id: person._id}}">
           <img v-if="person.imageUrl" v-bind:src="person.imageUrl + '?w=240'"/>
-          <h2>{{person.name}}</h2>
+          <h3>{{person.name}}</h3>
         </router-link>
-        <h3>Movies</h3>
-        <ul v-if="person.movies">
+        <!-- <h3>Movies</h3>
+        <ul v-if="person.movies" class="people-list__item__movies-list">
           <li v-for="movie in person.movies">
             <div>
               <router-link :to="{name: 'movie', params: {id: movie._id}}">
@@ -23,7 +23,7 @@
               </router-link>
             </div>
           </li>
-        </ul>
+        </ul> -->
       </li>
     </ul>
 
@@ -72,19 +72,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  h1, h2 {
-    font-weight: normal;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    margin: 0 10px;
-  }
-</style>

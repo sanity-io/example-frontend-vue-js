@@ -9,13 +9,17 @@
       </router-link>
     </nav>
     <router-view />
-    <div class="hearts">
-      <img class="logo" src="./assets/sanity-logo.svg"/>
+    <footer>
+      <a href="http://sanity.io">
+        <img class="logo" src="./assets/sanity-logo.svg"/>
+      </a>
       +
-      <img class="logo" src="./assets/vue-logo.svg"/>
+      <a href="https://vuejs.org">
+        <img class="logo" src="./assets/vue-logo.svg"/>
+      </a>
       =
       💖
-    </div>
+    </footer>
   </div>
 </template>
 
@@ -24,19 +28,3 @@ export default {
   name: 'app'
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-.hearts {
-  font-size: 4em;
-}
-.logo {
-  height: 40px;
-}
-</style>

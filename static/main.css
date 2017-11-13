@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  padding-top: 3.5rem;
+}
+
+footer {
+  padding: 5rem 1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+footer img {
+  display: inline-block;
+  height: 1em;
+  width: auto;
+}
+
+nav {
+  position: fixed;
+  display: flex;
+  align-items: stretch;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  padding: 1em;
+  font-size: 1rem;
+}
+
+nav a {
+  flex-grow: 1;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.list {
+  display: block;
+  margin: 0;
+  padding: 0;
+  clear: both;
+}
+
+.list > li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: stretch;
+}
+
+.list a {
+  text-decoration: none;
+  display: block;
+  flex-grow: 1;
+  color: #333;
+  padding: 0.5rem;
+}
+
+.list a:hover {
+  background-color: #eee;
+}
+
+.list a:active {
+  color: white;
+  background-color: black;
+}
+
+.list h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.list img {
+  display: block;
+  height: auto;
+  width: 3em;
+  margin-right: 0.5rem;
+  float: left;
+
+}
+
+.movies-list__directed-by {
+  display: block;
+  font-size: 1rem;
+}
+
+.movie {
+}
+
+.movie > h2 {
+  margin: 2rem 0 0 0;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.movie .list img {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  object-fit: cover;
+}
+
+.movie__header {
+  clear: both;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.movie__header > h1 {
+  font-size: 3rem;
+  line-height: 1em;
+  margin: 1rem 0 0 0;
+  padding: 0;
+}
+
+.movie__header > img {
+  display: block;
+  width: 33vw;
+  max-width: 20rem;
+  height: auto;
+  float: left;
+  margin-right: 0.5rem;
+}
+
+.movie .list {
+  line-height: 2rem;
+}
+
+.person > h2 {
+  margin: 2rem 0 0 0;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.person .list img {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  object-fit: cover;
+}
+
+.person .list {
+  line-height: 2rem;
+}
+
+.person__header {
+  clear: both;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.person__header > h1 {
+  font-size: 3rem;
+  line-height: 1em;
+  margin: 1rem 0 0 0;
+  padding: 0;
+}
+
+.person__header > img {
+  display: block;
+  width: 33vw;
+  max-width: 20rem;
+  height: auto;
+  float: left;
+  margin-right: 0.5rem;
+}

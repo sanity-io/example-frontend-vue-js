@@ -8,15 +8,17 @@
       {{ error }}
     </div>
 
-    <ul>
-      <li v-for="movie in movies">
+    <ul class="list">
+      <li v-for="movie in movies" class="list__item">
         <router-link :to="{name: 'movie', params: {id: movie._id}}">
-          {{movie.title}}
           <img v-if="movie.posterUrl" v-bind:src="movie.posterUrl + '?w=100'"/>
-          ({{movie.releaseDate.substr(0, 4)}})
-          <span v-if="movie.director">
-            Directed by {{movie.director}}
-          </span>
+          <div>
+            <div>{{movie.releaseDate.substr(0, 4)}}</div>
+            <h3>{{movie.title}}</h3>
+            <span v-if="movie.director" class="movies-list__directed-by">
+              Directed by {{movie.director}}
+            </span>
+          </div>
         </router-link>
       </li>
     </ul>
@@ -62,23 +64,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>

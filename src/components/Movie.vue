@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="movie">
     <div class="loading" v-if="loading">
       Loading...
     </div>
@@ -7,25 +7,24 @@
     <div v-if="error" class="error">
       {{ error }}
     </div>
-
-    <div v-if="movie">
-      <h2>
-        {{movie.title}} ({{movie.releaseDate.substr(0, 4)}})
-      </h2>
+    <div class="movie__header">
       <img v-if="movie.posterUrl" v-bind:src="movie.posterUrl + '?w=240'"/>
-      <div>
-        <h3>Cast</h3>
-        <ul>
-          <li v-for="cast in movie.cast">
-            <img v-if="cast.person.imageUrl" v-bind:src="cast.person.imageUrl + '?w=240'"/>
-            <router-link :to="{name: 'person', params: {id: cast.person._id}}">
-              {{cast.person.name}}
-            </router-link>
-             as {{cast.characterName}}
-          </li>
-        </ul>
-      </div>
+      {{movie.releaseDate.substr(0, 4)}}
+      <h1>
+        {{movie.title}}
+      </h1>
     </div>
+    <h2>Cast</h2>
+    <ul class="list">
+      <li v-for="cast in movie.cast">
+        <router-link :to="{name: 'person', params: {id: cast.person._id}}">
+          <img v-if="cast.person.imageUrl" v-bind:src="cast.person.imageUrl + '?w=240'"/>
+          <div>
+            {{cast.person.name}} as {{cast.characterName}}
+          </div>
+        </router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -82,23 +81,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>
