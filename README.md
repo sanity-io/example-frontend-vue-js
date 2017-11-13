@@ -4,8 +4,7 @@ Sanity + Vue.js frontend example
 This is an example frontend for the movies database dataset using [Vue.js](https://vuejs.org/).
 
 ## Prerequisites
-You will need [Node.js](https://nodejs.org) version 6.0 installed on your system
-
+You will need [Node.js](https://nodejs.org) version 6.0 or greater installed on your system.
 
 ## Setup
 
