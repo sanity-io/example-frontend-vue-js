@@ -9,7 +9,7 @@
 
     <div v-if="person" class="person">
       <div class="person__header">
-        <img v-if="person.imageUrl" v-bind:src="person.imageUrl + '?w=240'"/>
+        <img v-if="person.imageUrl" v-bind:src="person.imageUrl + '?w=480'"/>
         <h1>{{person.name}}</h1>
       </div>
       <h2>Acted in</h2>

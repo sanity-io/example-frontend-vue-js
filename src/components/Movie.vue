@@ -20,7 +20,7 @@
       <ul class="list">
         <li v-for="cast in movie.cast">
           <router-link :to="{name: 'person', params: {id: cast.person._id}}">
-            <img v-if="cast.person.imageUrl" v-bind:src="cast.person.imageUrl + '?w=240'" />
+            <img v-if="cast.person.imageUrl" v-bind:src="cast.person.imageUrl + '?w=480'" />
             <div>
               {{cast.person.name}} as {{cast.characterName}}
             </div>
