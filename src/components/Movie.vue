@@ -15,6 +15,7 @@
         <h1>
           {{movie.title}}
         </h1>
+        <div v-html="overviewHtml" />
       </div>
       <h2>Cast</h2>
       <ul class="list">
@@ -33,10 +34,12 @@
 
 <script>
 import sanity from '../sanity'
+import blocksToHtml from '@sanity/block-content-to-html'
 
 const query = `*[_type == "movie" && _id == $id] {
   _id,
   title,
+  overview,
   releaseDate,
   "posterUrl": poster.asset->url,
   "cast": castMembers[] {
@@ -77,6 +80,7 @@ export default {
       sanity.fetch(query, {id: this.id}).then(movie => {
         this.loading = false
         this.movie = movie
+        this.overviewHtml = blocksToHtml({blocks: movie.overview})
       }, error => {
         this.error = error
       })
