@@ -9,18 +9,18 @@
     </div>
 
     <div v-if="movie">
-      <div class="movie__header">
+      <div class="header">
         <img v-if="movie.posterUrl" v-bind:src="movie.posterUrl + '?w=240'" />
         {{movie.releaseDate.substr(0, 4)}}
         <h1>
           {{movie.title}}
         </h1>
-        <div v-html="overviewHtml" />
+        <div v-html="overviewHtml" class="overview" />
       </div>
       <h2>Cast</h2>
       <ul class="list">
-        <li v-for="cast in movie.cast">
-          <router-link :to="{name: 'person', params: {id: cast.person._id}}">
+        <li v-for="cast in movie.cast" v-bind:key="cast._key">
+          <router-link :to="{name: 'person', params: {id: cast.person._id}}" >
             <img v-if="cast.person.imageUrl" v-bind:src="cast.person.imageUrl + '?w=480'" />
             <div>
               {{cast.person.name}} as {{cast.characterName}}
@@ -77,10 +77,45 @@ export default {
     fetchData () {
       this.error = this.movie = null
       this.loading = true
+
+      const serializers = {
+        types: {
+          summaries: props => {
+            const h = blocksToHtml.h
+
+            if (!props.node.summaries) {
+              return false
+            }
+
+            const summariesArray = props.node.summaries.map(summary => {
+              return (
+                h('div', null, [
+                  h('p', null, summary.summary),
+                  h('span', null, '—'),
+                  h('a', {href: summary.url}, summary.author)
+                ])
+              )
+            })
+
+            return (
+              h('div', [
+                h('h1', null, props.node.caption),
+                h('div', null, summariesArray)
+              ])
+            )
+          }
+        }
+      }
+
       sanity.fetch(query, {id: this.id}).then(movie => {
         this.loading = false
         this.movie = movie
-        this.overviewHtml = blocksToHtml({blocks: movie.overview})
+        this.overviewHtml = blocksToHtml({
+          blocks: movie.overview,
+          serializers: serializers,
+          dataset: sanity.clientConfig.dataset,
+          projectId: sanity.clientConfig.projectId
+        })
       }, error => {
         this.error = error
       })
@@ -103,20 +138,20 @@ export default {
   object-fit: cover;
 }
 
-.movie__header {
+.header {
   clear: both;
   overflow: hidden;
   padding: 0.5rem;
 }
 
-.movie__header > h1 {
+.header > h1 {
   font-size: 3rem;
   line-height: 1em;
   margin: 1rem 0 0 0;
   padding: 0;
 }
 
-.movie__header > img {
+.header > img {
   display: block;
   width: 33vw;
   max-width: 20rem;
@@ -127,5 +162,14 @@ export default {
 
 .movie .list {
   line-height: 2rem;
+}
+
+.overview :global(figure) {
+  margin: 0;
+  padding: 0;
+}
+
+.overview :global(img) {
+  max-width: 100%;
 }
 </style>
