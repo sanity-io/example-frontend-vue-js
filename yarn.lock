@@ -2,6 +2,20 @@
 # yarn lockfile v1
 
 
+"@sanity/block-content-to-html@^1.3.5":
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/@sanity/block-content-to-html/-/block-content-to-html-1.3.5.tgz#70fe3600d6726747c844ea587474d4e66c479a16"
+  dependencies:
+    "@sanity/block-content-to-hyperscript" "^1.2.8"
+
+"@sanity/block-content-to-hyperscript@^1.2.8":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@sanity/block-content-to-hyperscript/-/block-content-to-hyperscript-1.3.2.tgz#f03ec73f2db0869b4471a6273dbde7b387975207"
+  dependencies:
+    "@sanity/generate-help-url" "^0.123.0"
+    hyperscript "^2.0.2"
+    object-assign "^4.1.1"
+
 "@sanity/client@^0.120.0":
   version "0.120.0"
   resolved "https://registry.yarnpkg.com/@sanity/client/-/client-0.120.0.tgz#42f6c1c407211580b4603c94c08b686ed573e1f6"
@@ -24,6 +38,10 @@
 "@sanity/generate-help-url@^0.120.0":
   version "0.120.0"
   resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-0.120.0.tgz#3cccb97f91a81d188bca58920decd2f4c3ea3d0f"
+
+"@sanity/generate-help-url@^0.123.0":
+  version "0.123.0"
+  resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-0.123.0.tgz#a9e1a3b59c6f8b316ca5092c2a9f48b0efe6807c"
 
 "@sanity/observable@^0.120.0":
   version "0.120.0"
@@ -948,6 +966,10 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
+browser-split@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/browser-split/-/browser-split-0.0.0.tgz#41419caef769755929dd518967d3eec0a6262771"
+
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/browserify-aes/-/browserify-aes-1.1.1.tgz#38b7ab55edb806ff2dcda1a7f1620773a477c49f"
@@ -1163,6 +1185,12 @@ clap@^1.0.9:
   resolved "https://registry.yarnpkg.com/clap/-/clap-1.2.3.tgz#4f36745b32008492557f46412d66d50cb99bce51"
   dependencies:
     chalk "^1.1.3"
+
+class-list@~0.1.0, class-list@~0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/class-list/-/class-list-0.1.1.tgz#9b9745192c4179b5da0a0d7633658e3c70d796cb"
+  dependencies:
+    indexof "0.0.1"
 
 clean-css@4.1.x:
   version "4.1.9"
@@ -2672,6 +2700,12 @@ html-comment-regex@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/html-comment-regex/-/html-comment-regex-1.1.1.tgz#668b93776eaae55ebde8f3ad464b307a4963625e"
 
+html-element@^2.0.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/html-element/-/html-element-2.2.0.tgz#c3c1ff88c261db74d0af6391eef90c346f900730"
+  dependencies:
+    class-list "~0.1.1"
+
 html-entities@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
@@ -2764,6 +2798,14 @@ http-signature@~1.1.0:
 https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
+
+hyperscript@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/hyperscript/-/hyperscript-2.0.2.tgz#3839cba45554bdfe27bb81c2142d1684f8135af5"
+  dependencies:
+    browser-split "0.0.0"
+    class-list "~0.1.0"
+    html-element "^2.0.0"
 
 iconv-lite@0.4.19:
   version "0.4.19"

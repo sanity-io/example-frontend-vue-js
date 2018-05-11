@@ -9,9 +9,9 @@
     </div>
 
     <ul class="list">
-      <li v-for="person in people" class="list__item">
+      <li v-for="person in people" class="list__item" :key="person._id">
         <router-link :to="{name: 'person', params: {id: person._id}}">
-          <img v-if="person.imageUrl" v-bind:src="person.imageUrl + '?w=240'"/>
+          <img v-if="person.image" :src="imageUrlFor( person.image ).width(240)"/>
           <h3>{{person.name}}</h3>
         </router-link>
       </li>
@@ -22,11 +22,14 @@
 
 <script>
 import sanity from '../sanity'
+import imageUrlBuilder from '@sanity/image-url'
+
+const imageBuilder = imageUrlBuilder(sanity)
 
 const query = `*[_type == "person"] {
   _id,
   name,
-  "imageUrl": image.asset->url
+  image
 }[0...50]
 `
 
@@ -45,6 +48,9 @@ export default {
     '$route': 'fetchData'
   },
   methods: {
+    imageUrlFor (source) {
+      return imageBuilder.image(source)
+    },
     fetchData () {
       this.error = this.post = null
       this.loading = true
@@ -60,5 +66,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .list {
+    margin: 1rem;
+  }
 </style>

@@ -8,37 +8,42 @@
     </div>
 
     <div v-if="person" class="person">
-      <div class="person__header">
-        <img v-if="person.imageUrl" v-bind:src="person.imageUrl + '?w=480'"/>
-        <h1>{{person.name}}</h1>
+      <div>
+        <img v-if="person.image" :src="imageUrlFor(person.image).width(480)"/>
       </div>
-      <h2>Acted in</h2>
-      <ul v-if="person.actedIn" class="list">
-        <li v-for="movie in person.actedIn">
-          <router-link :to="{name: 'movie', params: {id: movie._id}}">
-            <img v-if="movie.posterUrl" v-bind:src="movie.posterUrl + '?w=240'"/>
-            <div>
-              {{movie.title}} ({{movie.releaseDate.substr(0, 4)}})
-            </div>
-          </router-link>
-        </li>
-      </ul>
+      <div>
+        <h1>{{person.name}}</h1>
+        <h2>Related movies</h2>
+        <ul v-if="person.actedIn" class="list">
+          <li v-for="movie in person.actedIn" :key="movie._id">
+            <router-link :to="{name: 'movie', params: {id: movie._id}}">
+              <img v-if="movie.poster" :src="imageUrlFor(movie.poster).ignoreImageParams().width(240)"/>
+              <div>
+                {{movie.title}} ({{movie.releaseDate.substr(0, 4)}})
+              </div>
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import sanity from '../sanity'
+import imageUrlBuilder from '@sanity/image-url'
+
+const imageBuilder = imageUrlBuilder(sanity)
 
 const query = `*[_type == "person" && _id == $id] {
   _id,
   name,
-  "imageUrl": image.asset->url,
-  "actedIn": *[_type == "movie" && references(^._id) && (^._id in castMembers[].person._ref)] {
+  image,
+  "actedIn": *[_type == "movie" && references(^._id)] {
     _id,
     title,
     releaseDate,
-    "posterUrl": poster.asset->url
+    poster
   }
 }[0]
 `
@@ -63,6 +68,9 @@ export default {
     '$route': 'fetchData'
   },
   methods: {
+    imageUrlFor (source) {
+      return imageBuilder.image(source)
+    },
     fetchData () {
       this.error = this.person = null
       this.loading = true
@@ -78,21 +86,17 @@ export default {
 </script>
 
 <style scoped>
-.person > h2 {
-  margin: 2rem 0 0 0;
-  padding: 0 0.5rem;
-  border-bottom: 1px solid #ccc;
+.person {
+  margin: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 4fr;
 }
 
-.person .list img {
-  width: 2rem;
-  height: 2rem;
-  margin-right: 0.5rem;
-  object-fit: cover;
-}
-
-.person .list {
-  line-height: 2rem;
+.person .title {
+  font-size: 10vw;
+  line-height: 1em;
+  margin: 0;
 }
 
 .person__header {
@@ -110,10 +114,18 @@ export default {
 
 .person__header > img {
   display: block;
-  width: 33vw;
+  width: 20vw;
   max-width: 20rem;
   height: auto;
   float: left;
   margin-right: 0.5rem;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.person .list {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 180px));
 }
 </style>
