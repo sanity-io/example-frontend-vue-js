@@ -61,13 +61,15 @@ nav {
   background-color: #333;
   font-size: 1rem;
   height: 3.5rem;
+  justify-content: flex-start;
 }
 
 nav a {
-  flex-grow: 1;
   color: #fff;
   text-decoration: none;
   text-align: center;
+  padding: 0 1rem;
+  font-weight: 700;
 }
 </style>
 
