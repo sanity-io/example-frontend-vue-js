@@ -21,52 +21,55 @@
 </template>
 
 <script>
-import sanity from '../sanity'
-import imageUrlBuilder from '@sanity/image-url'
+import sanity from "../sanity";
+import imageUrlBuilder from "@sanity/image-url";
 
-const imageBuilder = imageUrlBuilder(sanity)
+const imageBuilder = imageUrlBuilder(sanity);
 
 const query = `*[_type == "person"] {
   _id,
   name,
   image
 }[0...50]
-`
+`;
 
 export default {
-  name: 'People',
-  data () {
+  name: "People",
+  data() {
     return {
       loading: true,
       people: []
-    }
+    };
   },
-  created () {
-    this.fetchData()
+  created() {
+    this.fetchData();
   },
   watch: {
-    '$route': 'fetchData'
+    $route: "fetchData"
   },
   methods: {
-    imageUrlFor (source) {
-      return imageBuilder.image(source)
+    imageUrlFor(source) {
+      return imageBuilder.image(source);
     },
-    fetchData () {
-      this.error = this.post = null
-      this.loading = true
-      sanity.fetch(query).then(people => {
-        this.loading = false
-        this.people = people
-      }, error => {
-        this.error = error
-      })
+    fetchData() {
+      this.error = this.post = null;
+      this.loading = true;
+      sanity.fetch(query).then(
+        people => {
+          this.loading = false;
+          this.people = people;
+        },
+        error => {
+          this.error = error;
+        }
+      );
     }
   }
-}
+};
 </script>
 
 <style scoped>
-  .list {
-    margin: 1rem;
-  }
+.list {
+  margin: 1rem;
+}
 </style>
