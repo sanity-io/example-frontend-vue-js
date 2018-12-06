@@ -16,20 +16,29 @@ Get the code by either cloning this repository using git
 
 Once downloaded, open the terminal in the project directory, and continue with:
 
-``` bash
-# install dependencies
+```
 npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Configuring Sanity
 If you're running your own Sanity project with the example movie dataset and feel like running this example with your own data, go to `src/sanity.js` and change the following two lines:
 
 ```

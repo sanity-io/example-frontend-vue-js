@@ -51,11 +51,11 @@
 </template>
 
 <script>
-import sanity from '../sanity'
-import blocksToHtml from '@sanity/block-content-to-html'
-import imageUrlBuilder from '@sanity/image-url'
+import sanity from "../sanity";
+import blocksToHtml from "@sanity/block-content-to-html";
+import imageUrlBuilder from "@sanity/image-url";
 
-const imageBuilder = imageUrlBuilder(sanity)
+const imageBuilder = imageUrlBuilder(sanity);
 
 const query = `*[_type == "movie" && _id == $id] {
   _id,
@@ -74,7 +74,7 @@ const query = `*[_type == "movie" && _id == $id] {
     }
   }
 }[0]
-`
+`;
 
 export default {
   props: {
@@ -82,75 +82,73 @@ export default {
       type: String
     }
   },
-  name: 'Movie',
-  data () {
+  name: "Movie",
+  data() {
     return {
       loading: true,
       movie: null
-    }
+    };
   },
-  created () {
-    this.fetchData()
+  created() {
+    this.fetchData();
   },
   watch: {
-    '$route': 'fetchData'
+    $route: "fetchData"
   },
   methods: {
-    imageUrlFor (source) {
-      return imageBuilder.image(source)
+    imageUrlFor(source) {
+      return imageBuilder.image(source);
     },
-    fetchData () {
-      this.error = this.movie = null
-      this.loading = true
+    fetchData() {
+      this.error = this.movie = null;
+      this.loading = true;
 
       const serializers = {
         types: {
           summaries: props => {
-            const h = blocksToHtml.h
+            const h = blocksToHtml.h;
 
             if (!props.node.summaries) {
-              return false
+              return false;
             }
 
             const summariesArray = props.node.summaries.map(summary => {
-              return (
-                h('div', null, [
-                  h('p', null, summary.summary),
-                  h('span', null, '—'),
-                  h('a', {href: summary.url}, summary.author)
-                ])
-              )
-            })
+              return h("div", null, [
+                h("p", null, summary.summary),
+                h("span", null, "—"),
+                h("a", { href: summary.url }, summary.author)
+              ]);
+            });
 
-            return (
-              h('div', [
-                h('h1', null, props.node.caption),
-                h('div', null, summariesArray)
-              ])
-            )
+            return h("div", [
+              h("h1", null, props.node.caption),
+              h("div", null, summariesArray)
+            ]);
           }
         }
-      }
+      };
 
-      sanity.fetch(query, {id: this.id}).then(movie => {
-        this.loading = false
-        this.movie = movie
-        this.overviewHtml = blocksToHtml({
-          blocks: movie.overview,
-          serializers: serializers,
-          dataset: sanity.clientConfig.dataset,
-          projectId: sanity.clientConfig.projectId
-        })
-      }, error => {
-        this.error = error
-      })
+      sanity.fetch(query, { id: this.id }).then(
+        movie => {
+          this.loading = false;
+          this.movie = movie;
+          this.overviewHtml = blocksToHtml({
+            blocks: movie.overview,
+            serializers: serializers,
+            dataset: sanity.clientConfig.dataset,
+            projectId: sanity.clientConfig.projectId
+          });
+        },
+        error => {
+          this.error = error;
+        }
+      );
     }
   }
-}
+};
 </script>
 
 <style scoped>
-
 .content {
   display: flex;
   flex-direction: column-reverse;
@@ -191,7 +189,6 @@ export default {
   margin: 0.5rem;
   object-fit: cover;
   display: block;
-
 }
 
 .header {
@@ -216,7 +213,10 @@ export default {
   text-align: center;
   padding-top: 5em;
   padding-bottom: 2em;
-  background-image: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 90%);
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.9) 90%
+  );
 }
 
 .cast-list {
@@ -273,7 +273,7 @@ export default {
 
 @media screen and (max-width: 499px) {
   .cast-character-name::before {
-    content: ' as ';
+    content: " as ";
   }
 }
 
@@ -351,7 +351,7 @@ export default {
 
 @media screen and (max-width: 499px) {
   .cast-character-name::before {
-    content: ' as ';
+    content: " as ";
   }
 }
 

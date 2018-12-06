@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import sanity from '../sanity'
-import imageUrlBuilder from '@sanity/image-url'
+import sanity from "../sanity";
+import imageUrlBuilder from "@sanity/image-url";
 
-const imageBuilder = imageUrlBuilder(sanity)
+const imageBuilder = imageUrlBuilder(sanity);
 
 const query = `*[_type == "person" && _id == $id] {
   _id,
@@ -46,7 +46,7 @@ const query = `*[_type == "person" && _id == $id] {
     poster
   }
 }[0]
-`
+`;
 
 export default {
   props: {
@@ -54,35 +54,38 @@ export default {
       type: String
     }
   },
-  name: 'Person',
-  data () {
+  name: "Person",
+  data() {
     return {
       loading: true,
       person: null
-    }
+    };
   },
-  created () {
-    this.fetchData()
+  created() {
+    this.fetchData();
   },
   watch: {
-    '$route': 'fetchData'
+    $route: "fetchData"
   },
   methods: {
-    imageUrlFor (source) {
-      return imageBuilder.image(source)
+    imageUrlFor(source) {
+      return imageBuilder.image(source);
     },
-    fetchData () {
-      this.error = this.person = null
-      this.loading = true
-      sanity.fetch(query, {id: this.id}).then(person => {
-        this.loading = false
-        this.person = person
-      }, error => {
-        this.error = error
-      })
+    fetchData() {
+      this.error = this.person = null;
+      this.loading = true;
+      sanity.fetch(query, { id: this.id }).then(
+        person => {
+          this.loading = false;
+          this.person = person;
+        },
+        error => {
+          this.error = error;
+        }
+      );
     }
   }
-}
+};
 </script>
 
 <style scoped>

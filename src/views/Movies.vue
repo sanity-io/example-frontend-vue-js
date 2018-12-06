@@ -26,10 +26,10 @@
 </template>
 
 <script>
-import sanity from '../sanity'
-import imageUrlBuilder from '@sanity/image-url'
+import sanity from "../sanity";
+import imageUrlBuilder from "@sanity/image-url";
 
-const imageBuilder = imageUrlBuilder(sanity)
+const imageBuilder = imageUrlBuilder(sanity);
 
 const query = `*[_type == "movie"] {
   _id,
@@ -37,38 +37,41 @@ const query = `*[_type == "movie"] {
   releaseDate,
   poster,
   "director": crewMembers[job == "Director"][0].person->name,
-}[0...50]`
+}[0...50]`;
 
 export default {
-  name: 'Movies',
-  data () {
+  name: "Movies",
+  data() {
     return {
       loading: true,
       movies: []
-    }
+    };
   },
-  created () {
-    this.fetchData()
+  created() {
+    this.fetchData();
   },
   watch: {
-    '$route': 'fetchData'
+    $route: "fetchData"
   },
   methods: {
-    imageUrlFor (source) {
-      return imageBuilder.image(source)
+    imageUrlFor(source) {
+      return imageBuilder.image(source);
     },
-    fetchData () {
-      this.error = this.post = null
-      this.loading = true
-      sanity.fetch(query).then(movies => {
-        this.loading = false
-        this.movies = movies
-      }, error => {
-        this.error = error
-      })
+    fetchData() {
+      this.error = this.post = null;
+      this.loading = true;
+      sanity.fetch(query).then(
+        movies => {
+          this.loading = false;
+          this.movies = movies;
+        },
+        error => {
+          this.error = error;
+        }
+      );
     }
   }
-}
+};
 </script>
 
 <style scoped>
